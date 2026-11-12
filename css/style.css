@@ -1,0 +1,182 @@
+/* Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: currentColor;
+}
+
+/* Custom properties */
+:root {
+  --font-size-sm: clamp(0.89rem, 0.02vi + 0.88rem, 0.9rem);
+  --font-size-md: clamp(1rem, 0.23vi + 0.94rem, 1.13rem);
+  --font-size-lg: clamp(1.13rem, 0.51vi + 1rem, 1.41rem);
+  --font-size-xl: clamp(1.27rem, 0.89vi + 1.04rem, 1.76rem);
+  --font-size-2xl: clamp(1.42rem, 1.41vi + 1.07rem, 2.2rem);
+  --font-size-3xl: clamp(1.6rem, 2.08vi + 1.08rem, 2.75rem);
+  --font-size-4xl: clamp(1.8rem, 2.97vi + 1.06rem, 3.43rem);
+  --font-size-5xl: clamp(2.03rem, 4.12vi + 1rem, 4.29rem);
+
+  --font-size-vis-xs: 10px;
+  --font-size-vis-sm: 12px;
+  --font-size-vis-base: 14px;
+  --font-size-vis-lg: 16px;
+
+  --font-family-header: "Titan One", sans-serif;
+  --font-family-body: "Google Sans Flex", sans-serif;
+
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+
+  --line-height-body: 1.5;
+  --line-height-header: 1;
+
+  --color-background: #ffffff;
+  --color-text: #020202;
+  --color-tick: #dbdbdb;
+  --color-accent: #ffda00;
+}
+
+/* Typography */
+body {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+h1 {
+  font-family: var(--font-family-header);
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-header);
+}
+
+hgroup p {
+  font-size: var(--font-size-xl);
+}
+
+hgroup {
+  display: grid;
+  gap: 0.5em;
+}
+
+/* Layout */
+main {
+  margin-block: 4rem;
+}
+
+article {
+  display: grid;
+  grid-template-columns:
+    [fullwidth-start] minmax(1rem, 1fr)
+    [wider-start]minmax(0, 0.5fr)
+    [wide-start] minmax(0.5rem, 0.25fr)
+    [main-start] minmax(0, 70ch) [main-end]
+    minmax(0.5rem, 0.25fr) [wide-end]
+    minmax(0, 0.5fr) [wider-end]
+    minmax(1rem, 1fr) [fullwidth-end];
+  row-gap: 2rem;
+}
+
+article > * {
+  grid-column: main;
+}
+
+.content--wide {
+  grid-column: wide;
+}
+
+.content--wider {
+  grid-column: wider;
+}
+
+.content--fullwidth {
+  grid-column: fullwidth;
+}
+
+.content--intro {
+  grid-column: wide-start / fullwidth-end;
+  background-color: var(--color-accent);
+  padding-block: 2rem;
+  display: grid;
+  grid-template-columns: subgrid;
+}
+
+hgroup {
+  grid-column: main;
+}
+
+/* Heatmap */
+.heatmap {
+  font-size: var(--font-size-vis-base);
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  justify-content: center;
+
+  > svg {
+    overflow: visible;
+  }
+
+  text {
+    fill: currentColor;
+  }
+
+  .tick line {
+    stroke: var(--color-tick);
+  }
+
+  .rows {
+    isolation: isolate;
+  }
+
+  .row__title {
+    font-size: var(--font-size-vis-lg);
+  }
+
+  .legend__title,
+  .column__header,
+  .row__average {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .row__average-marker {
+    fill: var(--color-text);
+  }
+
+  .swatch__bubble,
+  .cell__bubble {
+    fill: var(--color-accent);
+    mix-blend-mode: multiply;
+  }
+}
